@@ -1,6 +1,6 @@
 ♦ "Transfer to a bank account" ♦
 -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- ----------------------------
-The program was implemented according to the technical specifications - as the first project during training.
+The program was implemented according to the technical specifications - as the first project during training. Among the complications, the output of the report file data for the interval and the floating-point sum "double" has been added
 
 HOW DOES IT WORK
 -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- -------------------------------------------------- ----------------------------
