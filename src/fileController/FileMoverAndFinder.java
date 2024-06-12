@@ -13,14 +13,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileMoverAndFinder {
-    private static final Pattern patternDateAndTimeInTransfer = Pattern.compile("\\d{2}-\\d{2}-\\d{4}");
-    private static final Path inputPack = Paths.get("src/files/inputPack");
-    private static final Path outputPack = Paths.get("src/files/outputPack");
-    private static final Path archivePack = Paths.get("src/files/archivePack");
-    private static final Path spamPack = Paths.get("src/files/inputPack/spamPack");
-    private static final Path accountsPack = Paths.get("src/files/accountsPack");
+    private static final Pattern PATTERN_DATE_AND_TIME_IN_Transfer = Pattern.compile("\\d{2}-\\d{2}-\\d{4}");
+    private static final Path INPUT_PACK = Paths.get("src/files/inputPack");
+    private static final Path OUTPUT_PACK = Paths.get("src/files/outputPack");
+    private static final Path ARCHIVE_PACK = Paths.get("src/files/archivePack");
+    private static final Path SPAM_PACK = Paths.get("src/files/inputPack/spamPack");
+    private static final Path ACCOUNTS_PACK = Paths.get("src/files/accountsPack");
 
-    private static final List<File> listInputFiles = new ArrayList<>();
+    private static List<File> listInputFiles = new ArrayList<>();
 
     public static void checkInputFolder(Path inputPack) {
         if (Files.isDirectory(inputPack)) {
@@ -32,10 +32,10 @@ public class FileMoverAndFinder {
                         checkInputFolder(file.toPath());
                     } else if (file.getName().toLowerCase().endsWith(".txt")) {
                         listInputFiles.add(file);
-                    } else if (!(inputPack.equals(spamPack))) {
-                        System.out.print("Перемещаю " + file.getName() + " в папку для спама: " + spamPack.getFileName() + "... -> ");
+                    } else if (!(inputPack.equals(SPAM_PACK))) {
+                        System.out.print("Перемещаю " + file.getName() + " в папку для спама: " + SPAM_PACK.getFileName() + "... -> ");
                         try {
-                            Files.move(file.toPath(), spamPack.resolve(file.toPath().getFileName()),
+                            Files.move(file.toPath(), SPAM_PACK.resolve(file.toPath().getFileName()),
                                     StandardCopyOption.REPLACE_EXISTING);
                             System.out.println("Успешно.");
                             //flagToMoveFiles = true;
@@ -87,7 +87,7 @@ public class FileMoverAndFinder {
                         String tempStr;
                         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
                             while ((tempStr = bufferedReader.readLine()) != null) {
-                                Matcher matcherFindDateTime = patternDateAndTimeInTransfer.matcher(tempStr);
+                                Matcher matcherFindDateTime = PATTERN_DATE_AND_TIME_IN_Transfer.matcher(tempStr);
                                 while (matcherFindDateTime.find()) {
                                     readDateTime = matcherFindDateTime.group();
                                 }
@@ -156,19 +156,19 @@ public class FileMoverAndFinder {
     }
 
     public static Path getInputPack() {
-        return inputPack;
+        return INPUT_PACK;
     }
 
     public static Path getAccountsPack() {
-        return accountsPack;
+        return ACCOUNTS_PACK;
     }
 
     public static Path getOutputPack() {
-        return outputPack;
+        return OUTPUT_PACK;
     }
 
     public static Path getArchivePack() {
-        return archivePack;
+        return ARCHIVE_PACK;
     }
 
 }
